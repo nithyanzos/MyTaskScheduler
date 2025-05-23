@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Scheduler Pro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4cc9f0;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4ade80;
+            --warning-color: #fbbf24;
+            --danger-color: #f87171;
+            --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7f0 100%);
+            min-height: 100vh;
+            padding-bottom: 50px;
+        }
+        
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 15px 15px;
+            padding: 15px 0;
+            margin-bottom: 30px;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+        
+        .navbar-brand i {
+            margin-right: 8px;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            font-size: 16px;
+            color: var(--dark-color);
+            border-radius: 8px;
+            padding: 8px 16px;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+            color: var(--primary-color);
+        }
+        
+        .nav-link.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .nav-link i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+        
+        .welcome-section {
+            padding: 40px 0;
+        }
+        
+        .welcome-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            padding: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .welcome-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .welcome-title {
+            color: var(--primary-color);
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .welcome-subtitle {
+            color: var(--dark-color);
+            font-size: 18px;
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+        
+        .feature-grid {
+            margin-top: 40px;
+        }
+        
+        .feature-card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+            padding: 25px;
+            transition: all 0.3s ease;
+            height: 100%;
+            border-top: 5px solid transparent;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-card.team {
+            border-top-color: var(--primary-color);
+        }
+        
+        .feature-card.manager {
+            border-top-color: var(--warning-color);
+        }
+        
+        .feature-card.personal {
+            border-top-color: var(--success-color);
+        }
+        
+        .feature-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        
+        .icon-team {
+            background-color: rgba(67, 97, 238, 0.15);
+            color: var(--primary-color);
+        }
+        
+        .icon-manager {
+            background-color: rgba(251, 191, 36, 0.15);
+            color: var(--warning-color);
+        }
+        
+        .icon-personal {
+            background-color: rgba(74, 222, 128, 0.15);
+            color: var(--success-color);
+        }
+        
+        .feature-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .feature-description {
+            color: #666;
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .action-button {
+            display: inline-block;
+            padding: 12px 24px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .btn-team {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-team:hover {
+            background-color: var(--secondary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .btn-manager {
+            background-color: var(--warning-color);
+            color: var(--dark-color);
+        }
+        
+        .btn-manager:hover {
+            background-color: #f59e0b;
+            color: var(--dark-color);
+            transform: translateY(-2px);
+        }
+        
+        .btn-personal {
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        .btn-personal:hover {
+            background-color: #22c55e;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Content block for template extension */
+        .content-area {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            padding: 30px;
+            margin-top: 20px;
+        }
+        
+        /* Add smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Animations for page elements */
+        .animate-fade-in {
+            animation: fadeIn 1s ease;
+        }
+        
+        .animate-slide-up {
+            animation: slideUp 0.8s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* Stats counter section */
+        .stats-counter {
+            padding: 10px;
+            font-weight: 700;
+            font-size: 36px;
+            color: var(--primary-color);
+        }
+        
+        .stats-label {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Footer styling */
+        .footer {
+            margin-top: 80px;
+            padding: 20px 0;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 15px 15px 0 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}">
+                <i class="bi bi-kanban-fill"></i> Task Scheduler Pro
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'team_tasks.team_dashboard' %}active{% endif %}" href="{{ url_for('team_tasks.team_dashboard') }}">
+                            <i class="bi bi-people-fill"></i> Team Tasks
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'manager_tasks.manager_dashboard' %}active{% endif %}" href="{{ url_for('manager_tasks.manager_dashboard') }}">
+                            <i class="bi bi-briefcase-fill"></i> Manager Tasks
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'my_tasks.my_dashboard' %}active{% endif %}" href="{{ url_for('my_tasks.my_dashboard') }}">
+                            <i class="bi bi-person-workspace"></i> My Tasks
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% if request.endpoint == 'index' %}
+    <div class="container welcome-section">
+        <div class="row align-items-center">
+            <div class="col-lg-6 animate-fade-in">
+                <div class="welcome-card">
+                    <h1 class="welcome-title">Manage Your Risk Team Effectively</h1>
+                    <p class="welcome-subtitle">Assign tasks, set reminders, and track progress for your risk management team - all in one place.</p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="{{ url_for('team_tasks.team_dashboard') }}" class="action-button btn-team">
+                            <i class="bi bi-people-fill"></i> Manage Team Tasks
+                        </a>
+                        <a href="{{ url_for('my_tasks.my_dashboard') }}" class="action-button btn-personal ms-2">
+                            <i class="bi bi-list-check"></i> View My Tasks
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mt-4 mt-lg-0 animate-slide-up">
+                <img src="https://img.freepik.com/free-vector/teamwork-concept-landing-page_52683-20165.jpg" class="img-fluid rounded-4 shadow" alt="Team Collaboration">
+            </div>
+        </div>
+
+        <div class="row feature-grid mt-5">
+            <div class="col-md-4 mb-4 animate-fade-in" style="animation-delay: 0.2s">
+                <div class="feature-card team">
+                    <div class="feature-icon icon-team">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                    <h3 class="feature-title">Team Tasks</h3>
+                    <p class="feature-description">
+                        Assign, track and prioritize tasks for your team of 12 risk professionals. Set deadlines and monitor progress with ease.
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="{{ url_for('team_tasks.team_dashboard') }}" class="action-button btn-team btn-sm">
+                            Go to Team Tasks
+                        </a>
+                        <div class="stats-counter" id="teamTasksCount">{{ team_count }}</div>
+                    </div>
+                    <div class="text-end stats-label">Active Tasks</div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4 animate-fade-in" style="animation-delay: 0.4s">
+                <div class="feature-card manager">
+                    <div class="feature-icon icon-manager">
+                        <i class="bi bi-briefcase-fill"></i>
+                    </div>
+                    <h3 class="feature-title">Manager Tasks</h3>
+                    <p class="feature-description">
+                        Coordinate with your 2 reporting managers. Delegate critical work and ensure timely execution of high-priority items.
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="{{ url_for('manager_tasks.manager_dashboard') }}" class="action-button btn-manager btn-sm">
+                            Go to Manager Tasks
+                        </a>
+                        <div class="stats-counter" id="managerTasksCount">{{ manager_count }}</div>
+                    </div>
+                    <div class="text-end stats-label">Active Tasks</div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4 animate-fade-in" style="animation-delay: 0.6s">
+                <div class="feature-card personal">
+                    <div class="feature-icon icon-personal">
+                        <i class="bi bi-person-workspace"></i>
+                    </div>
+                    <h3 class="feature-title">My Tasks</h3>
+                    <p class="feature-description">
+                        Keep track of your personal tasks, set reminders, and prioritize your work to maintain high productivity.
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="{{ url_for('my_tasks.my_dashboard') }}" class="action-button btn-personal btn-sm">
+                            Go to My Tasks
+                        </a>
+                        <div class="stats-counter" id="myTasksCount">{{ my_count }}</div>
+                    </div>
+                    <div class="text-end stats-label">Active Tasks</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-5 animate-slide-up" style="animation-delay: 0.8s">
+            <div class="col-12">
+                <div class="welcome-card">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <h3>Upcoming Deadlines</h3>
+                            <ul class="list-group list-group-flush">
+                                {% if upcoming_tasks %}
+                                    {% for task in upcoming_tasks %}
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span>{{ task.title }}</span>
+                                        {% if task.due_date == today_str %}
+                                            <span class="badge bg-danger rounded-pill">Today</span>
+                                        {% elif task.due_date == tomorrow_str %}
+                                            <span class="badge bg-warning rounded-pill">Tomorrow</span>
+                                        {% else %}
+                                            <span class="badge bg-info rounded-pill">{{ task.due_date }}</span>
+                                        {% endif %}
+                                    </li>
+                                    {% endfor %}
+                                {% else %}
+                                    <li class="list-group-item">No upcoming deadlines</li>
+                                {% endif %}
+                            </ul>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <div class="alert alert-primary" role="alert">
+                                <h5><i class="bi bi-info-circle-fill"></i> Welcome back, Risk Manager!</h5>
+                                You have <strong>3</strong> tasks due today and <strong>5</strong> pending emails.
+                            </div>
+                            <div class="progress mb-2">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
+                            </div>
+                            <small class="text-muted">Team tasks completion rate this week</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="container footer mt-auto animate-fade-in">
+        <p>© 2025 Task Scheduler Pro | For Market Risk Management Team</p>
+    </footer>
+    {% else %}
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+    {% endif %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Simple animation for stats counters
+        document.addEventListener('DOMContentLoaded', function() {
+            const counters = document.querySelectorAll('.stats-counter');
+            
+            counters.forEach(counter => {
+                const final = parseInt(counter.innerText);
+                counter.innerText = '0';
+                
+                let count = 0;
+                const interval = setInterval(() => {
+                    count++;
+                    counter.innerText = count;
+                    if (count >= final) {
+                        clearInterval(interval);
+                    }
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
