@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+    <h2>{{ title }}</h2>
+    <form method="POST" action="{{ url_for('email_category_summary') }}">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.category.label(class="form-control-label") }}
+            {{ form.category(class="form-control form-control-lg") }}
+            {% if form.category.errors %}
+                <div class="invalid-feedback d-block">
+                    {% for error in form.category.errors %}{{ error }}{% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.subject.label(class="form-control-label") }}
+            {{ form.subject(class="form-control form-control-lg") }}
+            {% if form.subject.errors %}
+                <div class="invalid-feedback d-block">
+                    {% for error in form.subject.errors %}{{ error }}{% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.custom_message.label(class="form-control-label") }}
+            {{ form.custom_message(class="form-control form-control-lg", rows=5) }}
+            {% if form.custom_message.errors %}
+                <div class="invalid-feedback d-block">
+                    {% for error in form.custom_message.errors %}{{ error }}{% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        <fieldset class="form-group">
+            <legend class="col-form-label col-sm-2 pt-0">Send Options</legend>
+            <div class="form-check">
+                {{ form.send_to_dl(class="form-check-input") }}
+                {{ form.send_to_dl.label(class="form-check-label") }}
+            </div>
+            <div class="form-check">
+                {{ form.send_to_assignees(class="form-check-input") }}
+                {{ form.send_to_assignees.label(class="form-check-label") }}
+            </div>
+             {% if form.send_to_dl.errors or form.send_to_assignees.errors %}
+                <div class="invalid-feedback d-block">
+                    Please select at least one send option.
+                </div>
+            {% endif %}
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+{% endblock %}

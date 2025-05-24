@@ -1,0 +1,21 @@
+<p>Hello Team,</p>
+<p>Here is a summary of tasks for the category: <strong>{{ category.name }}</strong>.</p>
+{% if custom_message %}
+<p><strong>Message:</strong><br>{{ custom_message|nl2br }}</p>
+{% endif %}
+<hr>
+<ul>
+{% for task in tasks %}
+    <li>
+        <strong>{{ task.title }}</strong> (Due: {{ task.due_date.strftime('%Y-%m-%d') if task.due_date else 'N/A' }})
+        - Assigned to: {{ task.assignee.username if task.assignee else 'Unassigned' }}
+        - Status: {{ task.status }}
+        {% if task.description %}
+            <p style="margin-left: 20px; font-size: 0.9em;"><em>{{ task.description|truncate(150)|nl2br }}</em></p>
+        {% endif %}
+    </li>
+{% else %}
+    <li>No active tasks in this category.</li>
+{% endfor %}
+</ul>
+<p>Thank you.</p>

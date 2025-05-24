@@ -1,0 +1,7 @@
+<p>Hello {{ user.username }},</p>
+<p>The task "<strong>{{ task.title }}</strong>" which is assigned to you has been updated.</p>
+<p><strong>Description:</strong> {{ task.description }}</p>
+<p><strong>Status:</strong> {{ task.status }}</p>
+<p><strong>Due Date:</strong> {{ task.due_date.strftime('%Y-%m-%d') if task.due_date else 'Not set' }}</p>
+<p>Please review the changes.</p>
+<p>Thank you.</p>

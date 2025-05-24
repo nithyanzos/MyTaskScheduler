@@ -1,0 +1,7 @@
+Flask
+Flask-SQLAlchemy
+SQLAlchemy
+Flask-WTF
+wtforms_sqlalchemy
+Flask-Mail
+APScheduler

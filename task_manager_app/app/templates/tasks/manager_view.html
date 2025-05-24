@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Tasks Managed by {{ manager.username }}</h2>
+
+    {% if direct_reports %}
+        <p>Viewing tasks for: 
+        {% for report in direct_reports %}
+            {{ report.username }}{% if not loop.last %}, {% endif %}
+        {% endfor %}
+        </p>
+    {% else %}
+        <p>{{ manager.username }} has no direct reports.</p>
+    {% endif %}
+
+    {% if tasks %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Assigned To</th>
+                <th>Description</th>
+                <th>Due Date</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Category</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ task.id }}</td>
+                <td>{{ task.title }}</td>
+                <td>{{ task.assignee.username if task.assignee else 'N/A' }}</td>
+                <td>{{ task.description[:100] + '...' if task.description and task.description|length > 100 else task.description }}</td>
+                <td>{{ task.due_date.strftime('%Y-%m-%d') if task.due_date else 'N/A' }}</td>
+                <td>{{ task.priority }}</td>
+                <td>{{ task.status }}</td>
+                <td>{{ task.category.name if task.category else 'N/A' }}</td>
+                <td>
+                    <a href="{{ url_for('edit_task', task_id=task.id) }}" class="btn btn-primary btn-sm">Edit</a>
+                    <!-- Further actions can be added -->
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No tasks found for the direct reports of {{ manager.username }}.</p>
+    {% endif %}
+{% endblock %}

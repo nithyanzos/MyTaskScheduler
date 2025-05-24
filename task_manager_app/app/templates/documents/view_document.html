@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>{{ document.title }}</h2>
+    <small>Category: {{ document.category.name if document.category else 'N/A' }} | Uploaded: {{ document.uploaded_at.strftime('%Y-%m-%d %H:%M') }}</small>
+    <hr>
+
+    {% if document.content %}
+        <h3>Content:</h3>
+        <div class="card card-body bg-light">
+            {{ document.content|safe }} {# Use |safe if content is trusted HTML, otherwise consider Markdown rendering #}
+        </div>
+    {% endif %}
+
+    {% if document.link %}
+        <h3>External Link:</h3>
+        <p><a href="{{ document.link }}" target="_blank">{{ document.link }}</a></p>
+    {% endif %}
+
+    <hr>
+    <a href="{{ url_for('list_documents') }}" class="btn btn-secondary">Back to List</a>
+    <a href="{{ url_for('edit_document', doc_id=document.id) }}" class="btn btn-primary">Edit</a>
+{% endblock %}
